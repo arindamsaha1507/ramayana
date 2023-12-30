@@ -1,5 +1,5 @@
 /.venv
 /.vscode
 /__pycache__
-primary_word_list.txt
-secondary_word_list.txt
+primary_word_list.csv
+secondary_word_list.csv
