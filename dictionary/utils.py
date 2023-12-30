@@ -115,7 +115,32 @@ class UtilFuncs:
         return re.sub(r"[^a-zA-Z0-9]", "", string)
 
     @staticmethod
-    def find_last_letter(string: str) -> str:
+    def find_last_letter(string: str, number: int = 1) -> str:
         """Find the last letter of the string."""
 
-        return vk.get_vinyaasa(string)[-1]
+        if number == 1:
+            return vk.get_vinyaasa(string)[-1]
+        else:
+            return vk.get_shabda(vk.get_vinyaasa(string)[-number:])
+
+    @staticmethod
+    def create_subanta_key(word: str, category: int) -> str:
+        """Create a key for the subanta."""
+
+        last_letter = UtilFuncs.find_last_letter(word)
+
+        if last_letter == "न्":
+            nn = 2
+        elif last_letter == "त्":
+            nn = 2
+        else:
+            nn = 1
+        last_letter = UtilFuncs.find_last_letter(word, nn)
+
+        return f"{last_letter} {category}", nn
+
+
+if __name__ == "__main__":
+    print(UtilFuncs.create_subanta_key("स्वामिन्", 1))
+    print(UtilFuncs.create_subanta_key("राजन्", 1))
+    print(UtilFuncs.create_subanta_key("देव", 1))

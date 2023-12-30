@@ -181,11 +181,13 @@ def create_secondary_word_list(filename: str):
             if "ॐ" in word.word or "ॡ" in word.word:
                 continue
             if word.word_type == WordType.PRATIPADIKA and word.category != "v":
-                key = f"{UtilFuncs.find_last_letter(word.word)} {word.category.value}"
+                key, length = UtilFuncs.create_subanta_key(
+                    word.word, word.category.value
+                )
                 if key in rules:
                     rule = rules[key]
                     for ii, rr in enumerate(rule):
-                        subanta = SubantaMaker.replace_end(word.word, rr)
+                        subanta = SubantaMaker.replace_end(word.word, rr, length)
                         file.write(
                             f"{subanta},{word.word},{word.category},{(ii+1)//3}, {(ii+1)%3}\n"
                         )

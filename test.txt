@@ -1,12 +1,13 @@
-0 तपस्वी False
+0 तपस्वी True
 1 वाल्मीकिः True
 2 तपस् True
 2 स्वाध्याय True
 2 निरतम् True
 3 वाच् True
-3 विदाम् False
+3 विदाम् True
 4 वरम् True
 5 मुनि True
 5 पुङ्गवम् True
 6 नारदम् True
-7 परिपप्रच्छ False
+7 परि True
+7 पप्रच्छ False

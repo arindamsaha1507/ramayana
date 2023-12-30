@@ -46,13 +46,13 @@ class SubantaMaker:
     """Class for making subantas."""
 
     @staticmethod
-    def replace_end(word: str, replacement: str) -> str:
+    def replace_end(word: str, replacement: str, number: int = 1) -> str:
         """Replace the end of a word with a given string."""
 
         vinyaasa = vk.get_vinyaasa(word)
         rep = vk.get_vinyaasa(replacement)
 
-        return vk.get_shabda(vinyaasa[:-1] + rep)
+        return vk.get_shabda(vinyaasa[:-number] + rep)
 
 
 if __name__ == "__main__":
