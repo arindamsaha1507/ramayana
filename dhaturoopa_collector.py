@@ -2,6 +2,7 @@
 
 import json
 
+import os
 from dataclasses import dataclass
 
 from dictionary.utils import WordType, Gana, Pada, Vachana, Lakar, Purusha, Prayoga
@@ -66,8 +67,67 @@ class Tinganta(Word):
         super().__post_init__()
 
 
-class TingantaCreator:
+class TingantaMaker:
     """Class for creating tingantas."""
+
+    @staticmethod
+    def collect_info_from_key(key: str) -> tuple[Pada, Lakar]:
+        """Collect info from a key."""
+
+        pada = key[0]
+        if pada == "p":
+            pada = Pada.PARASMAIPADA
+        else:
+            pada = Pada.ATMANEPADA
+
+        lakar = key[1:]
+        lakar = LAKAR_MAP[lakar]
+
+        return pada, lakar
+
+    @staticmethod
+    def store_tinganta(tingantas: list[Tinganta], filename: str):
+        """Store a tinganta."""
+
+        if not filename.endswith(".csv"):
+            raise ValueError("Filename must end with .csv")
+
+        with open(filename, "w", encoding="utf-8") as f:
+            for tinganta in tingantas:
+                f.write(
+                    f"{tinganta.word},{tinganta.base},{tinganta.category},{tinganta.prayoga},{tinganta.pada},{tinganta.lakar},{tinganta.purusha},{tinganta.vachana}\n"
+                )
+
+    @staticmethod
+    def extract_tinganta_from_line(
+        line: str, prayoga: Prayoga, pada: Pada, lakar: Lakar, info: dict[str, str]
+    ) -> list[Tinganta]:
+        """Extract a tinganta from a word."""
+
+        tingantas = []
+
+        words = line.split(";")
+
+        for idd, word in enumerate(words):
+            purusha = PURUSHA_MAP[idd // 3]
+            vachana = VACHANA_MAP[idd % 3]
+            alt = word.split(",")
+            for aa in alt:
+                tinganta = Tinganta(
+                    word=aa,
+                    word_type=WordType.TINGANTA,
+                    category=GANA_MAP[info["gana"]],
+                    meaning=info["artha_english"],
+                    base=f"{info['dhatu']} ({info['aupadeshik']})",
+                    prayoga=prayoga,
+                    pada=pada,
+                    lakar=lakar,
+                    purusha=purusha,
+                    vachana=vachana,
+                )
+                tingantas.append(tinganta)
+
+        return tingantas
 
     @staticmethod
     def collect_dhaatus(filename: str, prayoga: Prayoga):
@@ -78,6 +138,8 @@ class TingantaCreator:
 
         with open(filename, "r", encoding="utf-8") as f:
             roopas = json.load(f)
+
+        tingantas = []
 
         for info in data:
             index = info["baseindex"]
@@ -90,45 +152,43 @@ class TingantaCreator:
                 if value == "":
                     continue
 
-                pada = key[0]
-                if pada == "p":
-                    pada = Pada.PARASMAIPADA
-                else:
-                    pada = Pada.ATMANEPADA
+                pada, lakar = TingantaMaker.collect_info_from_key(key)
 
-                lakar = key[1:]
-                lakar = LAKAR_MAP[lakar]
+                tingantas.extend(
+                    TingantaMaker.extract_tinganta_from_line(
+                        value, prayoga, pada, lakar, info
+                    )
+                )
 
-                words = value.split(";")
+        TingantaMaker.store_tinganta(tingantas, f"tinganta_{prayoga.name.lower()}.csv")
 
-                for idd, word in enumerate(words):
-                    purusha = PURUSHA_MAP[idd // 3]
-                    vachana = VACHANA_MAP[idd % 3]
-                    alt = word.split(",")
-                    for aa in alt:
-                        tinganta = Tinganta(
-                            word=aa,
-                            word_type=WordType.TINGANTA,
-                            category=GANA_MAP[info["gana"]],
-                            meaning=info["artha_english"],
-                            base=f"{info['dhatu']} ({info['aupadeshik']})",
-                            prayoga=prayoga,
-                            pada=pada,
-                            lakar=lakar,
-                            purusha=purusha,
-                            vachana=vachana,
-                        )
-                        print(
-                            f"{tinganta.word},{tinganta.base},{tinganta.category},{tinganta.prayoga},{tinganta.pada},{tinganta.lakar},{tinganta.purusha},{tinganta.vachana}"
-                        )
+    @staticmethod
+    def combine_csvs(files: list[str], output: str):
+        """Combine the csvs."""
+
+        cmd = "cat "
+        for file in files:
+            cmd += f"{file} "
+        cmd += f"> {output}"
+
+        os.system(cmd)
+
+        cmd = "rm "
+        for file in files:
+            cmd += f"{file} "
+        os.system(cmd)
 
 
 def main():
     """Main function."""
 
-    dhaatus = TingantaCreator.collect_dhaatus("dhatuforms.json", Prayoga.KARTARI)
+    TingantaMaker.collect_dhaatus("dhatuforms.json", Prayoga.KARTARI)
+    TingantaMaker.collect_dhaatus("dhatuforms_yak.json", Prayoga.BHAVAKARMANI)
+    TingantaMaker.combine_csvs(
+        ["tinganta_kartari.csv", "tinganta_bhavakarmani.csv"], "verb_word_list.csv"
+    )
 
-    print(dhaatus)
+    # print(dhaatus)
 
 
 if __name__ == "__main__":
