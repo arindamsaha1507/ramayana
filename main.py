@@ -5,7 +5,7 @@ import yaml
 
 
 def print_search_results(
-    index, word, primary_word_set, secondary_word_set, primary=False
+    index, word, primary_word_set, secondary_word_set, verb_word_set, primary=False
 ):
     """Print search results."""
 
@@ -21,12 +21,23 @@ def print_search_results(
         for idd, component in enumerate(components):
             if idd < len(components) - 1:
                 print_search_results(
-                    index, component, primary_word_set, secondary_word_set, primary=True
+                    index,
+                    component,
+                    primary_word_set,
+                    secondary_word_set,
+                    verb_word_set,
+                    primary=True,
                 )
             else:
                 print_search_results(
-                    index, component, primary_word_set, secondary_word_set
+                    index,
+                    component,
+                    primary_word_set,
+                    secondary_word_set,
+                    verb_word_set,
                 )
+    elif word in verb_word_set:
+        print(index, word, "True")
     else:
         print(index, word, "False")
 
@@ -42,6 +53,8 @@ def main():
         0
     ].tolist()
     secondary_word_set = set(secondary_word_list)
+    verb_word_list = pd.read_csv("verb_word_list.csv", header=None)[0].tolist()
+    verb_word_set = set(verb_word_list)
 
     kanda = 1
     sarga = 1
@@ -54,7 +67,9 @@ def main():
     # print(word_set)
 
     for index, word in enumerate(data):
-        print_search_results(index, word, primary_word_set, secondary_word_set)
+        print_search_results(
+            index, word, primary_word_set, secondary_word_set, verb_word_set
+        )
 
 
 if __name__ == "__main__":

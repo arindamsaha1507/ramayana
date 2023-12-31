@@ -95,7 +95,7 @@ class Gana(Enum):
     TUDADI = 6
     RUDHAADI = 7
     TANADI = 8
-    KRUAADI = 9
+    KRYADI = 9
     CHURADI = 10
 
 
