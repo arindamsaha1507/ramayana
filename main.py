@@ -64,7 +64,11 @@ def main():
     ].tolist()
     secondary_word_list.extend(avayava_list)
 
+    special_word_list = pd.read_csv("special_word_list.csv", header=None)[0].tolist()
+    secondary_word_list.extend(special_word_list)
+
     secondary_word_set = set(secondary_word_list)
+
     verb_word_list = pd.read_csv("verb_word_list.csv", header=None)[0].tolist()
     verb_word_set = set(verb_word_list)
 

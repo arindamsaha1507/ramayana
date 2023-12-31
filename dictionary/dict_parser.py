@@ -213,11 +213,27 @@ def create_secondary_word_list(filename: str):
     return collection
 
 
+def create_special_word_list(filename: str):
+    """Create a special word list."""
+
+    if not filename.endswith(".csv"):
+        raise ValueError(f"File {filename} is not a CSV file.")
+
+    words = SubantaMaker.collect_from_json("special.json")
+
+    with open(filename, "w", encoding="utf-8") as file:
+        for word in words:
+            file.write(
+                f"{word.word},{word.base},{word.category},{word.vibhakti},{word.vachana}\n"
+            )
+
+
 def main():
     """Main function."""
 
     create_primary_word_list("primary_word_list.csv")
     create_secondary_word_list("secondary_word_list.csv")
+    create_special_word_list("special_word_list.csv")
 
     # print(mwsa.get_meaning("राम"))
     # print(mwsa.get_meaning("पठ्"))

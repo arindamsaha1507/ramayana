@@ -1,10 +1,28 @@
 """Module for Word class."""
 
 from dataclasses import dataclass
+import json
 
 from akshara import varnakaarya as vk
 
 from dictionary.utils import WordType, Linga, Gana, Pada, Vibhakti, Vachana
+
+VIBHAKTI_MAP = {
+    1: Vibhakti.PRATHAMA,
+    2: Vibhakti.DWITIYA,
+    3: Vibhakti.TRITIYA,
+    4: Vibhakti.CHATURTHI,
+    5: Vibhakti.PANCHAMI,
+    6: Vibhakti.SHASTHI,
+    7: Vibhakti.SAPTAMI,
+    8: Vibhakti.SAMBODHANA,
+}
+
+VACHANA_MAP = {
+    1: Vachana.EKAVACHANA,
+    2: Vachana.DVIVACHANA,
+    3: Vachana.BAHUVACHANA,
+}
 
 
 @dataclass
@@ -53,6 +71,56 @@ class SubantaMaker:
         rep = vk.get_vinyaasa(replacement)
 
         return vk.get_shabda(vinyaasa[:-number] + rep)
+
+    @staticmethod
+    def collect_from_json(filename: str) -> list[Subanta]:
+        """Collect subantas from a JSON file."""
+
+        if not filename.endswith(".json"):
+            raise ValueError("Filename must end with .json")
+
+        subantas = []
+
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)["data"]
+
+        for entry in data:
+            base = entry["word"]
+            meaning = entry["artha_eng"]
+
+            if entry["linga"] == "N":
+                linga = Linga.NAPUMSAKALINGA
+            elif entry["linga"] == "P":
+                linga = Linga.PULLINGA
+            else:
+                linga = Linga.STRILINGA
+
+            forms = entry["forms"].split(";")
+
+            for idd, form in enumerate(forms):
+                vibhakti = VIBHAKTI_MAP[idd // 3 + 1]
+                vachana = VACHANA_MAP[idd % 3 + 1]
+
+                alt = form.split("-")
+                for aa in alt:
+                    if aa == "-":
+                        continue
+                    if " " in aa:
+                        aa = aa.split(" ")[1]
+                    subantas.append(
+                        Subanta(
+                            aa,
+                            WordType.SUBANTA,
+                            linga,
+                            [meaning],
+                            base,
+                            linga,
+                            vibhakti,
+                            vachana,
+                        )
+                    )
+
+        return subantas
 
 
 if __name__ == "__main__":
