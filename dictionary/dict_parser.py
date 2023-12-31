@@ -6,8 +6,26 @@ import os
 
 import yaml
 
-from dictionary.utils import Linga, UtilFuncs, WordType
+from dictionary.utils import Linga, UtilFuncs, WordType, Vibhakti, Vachana
 from dictionary.word import SubantaMaker, Word
+
+
+VIBHAKTI_MAP = {
+    1: Vibhakti.PRATHAMA,
+    2: Vibhakti.DWITIYA,
+    3: Vibhakti.TRITIYA,
+    4: Vibhakti.CHATURTHI,
+    5: Vibhakti.PANCHAMI,
+    6: Vibhakti.SHASTHI,
+    7: Vibhakti.SAPTAMI,
+    8: Vibhakti.SAMBODHANA,
+}
+
+VACHANA_MAP = {
+    1: Vachana.EKAVACHANA,
+    2: Vachana.DVIVACHANA,
+    3: Vachana.BAHUVACHANA,
+}
 
 
 @dataclass
@@ -189,7 +207,7 @@ def create_secondary_word_list(filename: str):
                     for ii, rr in enumerate(rule):
                         subanta = SubantaMaker.replace_end(word.word, rr, length)
                         file.write(
-                            f"{subanta},{word.word},{word.category},{(ii+1)//3}, {(ii+1)%3}\n"
+                            f"{subanta},{word.word},{word.category},{VIBHAKTI_MAP[ii//3 + 1]},{VACHANA_MAP[ii%3 + 1]}\n"
                         )
 
     return collection
