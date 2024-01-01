@@ -4,9 +4,6 @@ Word श्रूयताम् in 1_1_6 not found.
 Word चामन्त्त्र्य in 1_1_6 not found.
 Word श्रूयताम् in 1_1_7 not found.
 Word बुद्ध्वा in 1_1_7 not found.
-Word उरस्कः in 1_1_10 not found.
-Word सुशिराः in 1_1_10 not found.
-Word पीनवक्षाः in 1_1_11 not found.
 Word ज्ञानसम्पन्नः in 1_1_12 not found.
 Word प्रजापतिसमः in 1_1_13 not found.
 Word रिपुनिषूदनः in 1_1_13 not found.
@@ -110,7 +107,6 @@ Word तेषां in 1_1_39 not found.
 Word प्रतिशुश्राव in 1_1_39 not found.
 Word ऋषीणाम् in 1_1_39 not found.
 Word दण्डकारण्यवासिनाम् in 1_1_39 not found.
-Word रक्षसाम् in 1_1_39 not found.
 Word वधश्च in 1_1_39 not found.
 Word तत्रैव in 1_1_40 not found.
 Word वसता in 1_1_40 not found.
@@ -126,7 +122,6 @@ Word राक्षसं in 1_1_41 not found.
 Word निजघान in 1_1_41 not found.
 Word निवसता in 1_1_42 not found.
 Word जनस्थाननिवासिनाम् in 1_1_42 not found.
-Word रक्षसाम् in 1_1_42 not found.
 Word चतुर्दशसहस्राणि in 1_1_42 not found.
 Word ज्ञातिवधम् in 1_1_43 not found.
 Word श्रुत्वा in 1_1_43 not found.
@@ -190,7 +185,6 @@ Word जनयन् in 1_1_58 not found.
 Word महेषुणा in 1_1_58 not found.
 Word रसातलं in 1_1_58 not found.
 Word चैव in 1_1_58 not found.
-Word प्रीतमनाः in 1_1_59 not found.
 Word रामसहितः in 1_1_59 not found.
 Word गुहाम् in 1_1_59 not found.
 Word किष्किन्धाम् in 1_1_59 not found.
@@ -301,7 +295,6 @@ Word ज्वरकृतम् in 1_1_83 not found.
 Word क्षुद्भयम् in 1_1_83 not found.
 Word तस्करभयं in 1_1_83 not found.
 Word धनधान्ययुतानि in 1_1_84 not found.
-Word महायशाः in 1_1_85 not found.
 Word अश्वमेधशतैः in 1_1_85 not found.
 Word इष्ट्वा in 1_1_85 not found.
 Word कोट्ययुतम् in 1_1_85 not found.

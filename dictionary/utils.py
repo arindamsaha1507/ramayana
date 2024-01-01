@@ -190,6 +190,8 @@ class UtilFuncs:
             nn = 2
         elif last_letter == "त्":
             nn = 2
+        elif last_letter == "स्":
+            nn = 2
         else:
             nn = 1
         last_letter = UtilFuncs.find_last_letter(word, nn)
