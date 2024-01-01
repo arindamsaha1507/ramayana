@@ -192,8 +192,10 @@ def create_secondary_word_list(source_filename: str, filename: str):
                 rule = rules[key]
                 for ii, rr in enumerate(rule):
                     subanta = SubantaMaker.replace_end(word, rr, length)
+                    aa = ii // 3 + 1
+                    bb = ii % 3 + 1
                     file.write(
-                        f"{subanta},{word},{lingas[idd]},{VIBHAKTI_MAP[ii//3 + 1]},{VACHANA_MAP[ii%3 + 1]}\n"
+                        f"{subanta},{word},{lingas[idd]},{VIBHAKTI_MAP[aa]},{VACHANA_MAP[bb]}\n"
                     )
 
 
@@ -220,19 +222,6 @@ def main():
     create_secondary_word_list("primary_word_list.csv", "secondary_word_list.csv")
     create_special_word_list("special_word_list.csv")
 
-    # print(mwsa.get_meaning("राम"))
-    # print(mwsa.get_meaning("पठ्"))
-
-    # print(mwsa.get_category("राम"))
-    # print(mwsa.get_category("पठ्"))
-    # print(mwsa.get_category("लक्ष्मी"))
-    # print(mwsa.get_category("श्यामा"))
-    # print(mwsa.get_category("स्वामिन्"))
-    # print(mwsa.get_category("स्वामि"))
-
-
-# with open("raw/monier_williams_sa_en.json", "r") as f:
-#     data = json.load(f)
 
 if __name__ == "__main__":
     main()
