@@ -5,6 +5,7 @@ import json
 import os
 
 import yaml
+import pandas as pd
 
 from dictionary.utils import Linga, UtilFuncs, WordType, Vibhakti, Vachana
 from dictionary.word import SubantaMaker, Word
@@ -159,58 +160,41 @@ def create_primary_word_list(filename: str):
     return collection
 
 
-def create_secondary_word_list(filename: str):
+def create_secondary_word_list(source_filename: str, filename: str):
     """Create a secondary word list."""
 
     if not filename.endswith(".csv"):
         raise ValueError(f"File {filename} is not a CSV file.")
 
-    mwsa = MonierWilliamsParser()
+    words = pd.read_csv(source_filename, header=None)[0].tolist()
+    lingas = pd.read_csv(source_filename, header=None)[2].tolist()
 
-    collection: list[Word] = []
+    genders = {
+        "Linga.PULLINGA": Linga.PULLINGA,
+        "Linga.STRILINGA": Linga.STRILINGA,
+        "Linga.NAPUMSAKALINGA": Linga.NAPUMSAKALINGA,
+        "Linga.AVAYAVA": Linga.AVAYAVA,
+        "v": Linga.AVAYAVA,
+    }
 
-    for entry in mwsa.index:
-        typ = mwsa.get_category(entry)
-
-        if "v" in typ:
-            if typ == {"v"}:
-                typ = WordType.DHATU
-            else:
-                typ = WordType.PRATIPADIKA
-        else:
-            typ = WordType.PRATIPADIKA
-
-        for category in mwsa.get_category(entry):
-            collection.append(
-                Word(
-                    entry,
-                    typ,
-                    category,
-                    mwsa.get_meaning(entry),
-                    entry,
-                )
-            )
+    lingas = [genders[linga] for linga in lingas]
+    words = [word for word in words]
 
     with open("subanta_rules.yml", "r", encoding="utf-8") as file:
         rules = yaml.safe_load(file)
 
     with open(filename, "w", encoding="utf-8") as file:
-        for word in collection:
-            if "ॐ" in word.word or "ॡ" in word.word:
+        for idd, word in enumerate(words):
+            if "ॐ" in word or "ॡ" in word:
                 continue
-            if word.word_type == WordType.PRATIPADIKA and word.category != "v":
-                key, length = UtilFuncs.create_subanta_key(
-                    word.word, word.category.value
-                )
-                if key in rules:
-                    rule = rules[key]
-                    for ii, rr in enumerate(rule):
-                        subanta = SubantaMaker.replace_end(word.word, rr, length)
-                        file.write(
-                            f"{subanta},{word.word},{word.category},{VIBHAKTI_MAP[ii//3 + 1]},{VACHANA_MAP[ii%3 + 1]}\n"
-                        )
-
-    return collection
+            key, length = UtilFuncs.create_subanta_key(word, lingas[idd].value)
+            if key in rules:
+                rule = rules[key]
+                for ii, rr in enumerate(rule):
+                    subanta = SubantaMaker.replace_end(word, rr, length)
+                    file.write(
+                        f"{subanta},{word},{lingas[idd]},{VIBHAKTI_MAP[ii//3 + 1]},{VACHANA_MAP[ii%3 + 1]}\n"
+                    )
 
 
 def create_special_word_list(filename: str):
@@ -233,7 +217,7 @@ def main():
 
     create_primary_word_list("primary_word_list.csv")
     os.system("cat erratum.csv >> primary_word_list.csv")
-    create_secondary_word_list("secondary_word_list.csv")
+    create_secondary_word_list("primary_word_list.csv", "secondary_word_list.csv")
     create_special_word_list("special_word_list.csv")
 
     # print(mwsa.get_meaning("राम"))
