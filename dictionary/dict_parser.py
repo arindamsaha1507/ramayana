@@ -232,6 +232,7 @@ def main():
     """Main function."""
 
     create_primary_word_list("primary_word_list.csv")
+    os.system("cat erratum.csv >> primary_word_list.csv")
     create_secondary_word_list("secondary_word_list.csv")
     create_special_word_list("special_word_list.csv")
 

@@ -1,5 +1,6 @@
 """Main testing module."""
 
+import os
 import pandas as pd
 import yaml
 
@@ -88,9 +89,10 @@ def search_all_words(kanda, sarga, section, word_sets):
     for result in results:
         for rr in result:
             if rr[2] is not True:
-                raise ValueError(
-                    f"Word {rr[1]} in {kanda}_{sarga}_{section} not found."
-                )
+                string = f"Word {rr[1]} in {kanda}_{sarga}_{section} not found."
+                with open("not_found.txt", "a", encoding="utf-8") as file:
+                    file.write(string + "\n")
+
         ww = "-".join([rr[1] for rr in result])
         sentence.append(ww)
 
@@ -100,12 +102,15 @@ def search_all_words(kanda, sarga, section, word_sets):
 def main():
     """Main function."""
 
+    if os.path.exists("not_found.txt"):
+        os.remove("not_found.txt")
+
     word_sets = make_word_sets()
 
     kanda = 1
     sarga = 1
 
-    for section in range(1, 4):
+    for section in range(1, 90):
         search_all_words(kanda, sarga, section, word_sets)
 
 
