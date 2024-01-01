@@ -1,15 +1,10 @@
-Word श्रोतुम् in 1_1_5 not found.
 Word ज्ञातुम् in 1_1_5 not found.
 Word श्रुत्वा in 1_1_6 not found.
 Word श्रूयताम् in 1_1_6 not found.
 Word चामन्त्त्र्य in 1_1_6 not found.
 Word श्रूयताम् in 1_1_7 not found.
 Word बुद्ध्वा in 1_1_7 not found.
-Word बाहुः in 1_1_9 not found.
-Word हनुः in 1_1_9 not found.
 Word उरस्कः in 1_1_10 not found.
-Word जत्रुः in 1_1_10 not found.
-Word आजानुबाहुः in 1_1_10 not found.
 Word सुशिराः in 1_1_10 not found.
 Word पीनवक्षाः in 1_1_11 not found.
 Word ज्ञानसम्पन्नः in 1_1_12 not found.
@@ -18,13 +13,10 @@ Word रिपुनिषूदनः in 1_1_13 not found.
 Word परिरक्षिता in 1_1_13 not found.
 Word सर्वशास्त्रार्थतत्त्वज्ञः in 1_1_15 not found.
 Word सर्वलोकप्रियः in 1_1_15 not found.
-Word साधुः in 1_1_15 not found.
 Word अदीनात्मा in 1_1_15 not found.
-Word सिन्धुभिः in 1_1_16 not found.
 Word सर्वसमः in 1_1_16 not found.
 Word सदैकप्रियदर्शनः in 1_1_16 not found.
 Word कौसल्यानन्दवर्धनः in 1_1_17 not found.
-Word विष्णुना in 1_1_18 not found.
 Word कालाग्निसदृशः in 1_1_18 not found.
 Word क्षमया in 1_1_18 not found.
 Word पृथिवीसमः in 1_1_18 not found.
@@ -161,7 +153,6 @@ Word सीताम् in 1_1_48 not found.
 Word मार्गमाणः in 1_1_48 not found.
 Word कबन्धन्नाम in 1_1_48 not found.
 Word सन्ददर्श in 1_1_48 not found.
-Word महाबाहुः in 1_1_49 not found.
 Word निहत्य in 1_1_49 not found.
 Word स्वर्गतश्च in 1_1_49 not found.
 Word धर्मचारिणीम् in 1_1_49 not found.
@@ -192,7 +183,6 @@ Word राघवप्रत्ययार्थम् in 1_1_56 not found.
 Word महापर्वतसन्निभम् in 1_1_56 not found.
 Word उत्तमं in 1_1_56 not found.
 Word दर्शयामास in 1_1_56 not found.
-Word महाबाहुः in 1_1_57 not found.
 Word उत्स्मयित्वा in 1_1_57 not found.
 Word सम्पूर्णं in 1_1_57 not found.
 Word पुनश्च in 1_1_58 not found.
@@ -216,7 +206,6 @@ Word सुग्रीवमेव in 1_1_62 not found.
 Word प्रत्यपादयत् in 1_1_62 not found.
 Word वानरर्षभः in 1_1_63 not found.
 Word जनकात्मजाम् in 1_1_63 not found.
-Word दिदृक्षुः in 1_1_63 not found.
 Word समानीय in 1_1_63 not found.
 Word प्रस्थापयामास in 1_1_63 not found.
 Word शतयोजनविस्तीर्णम् in 1_1_64 not found.
@@ -256,7 +245,6 @@ Word क्षोभयामास in 1_1_70 not found.
 Word सरितां in 1_1_71 not found.
 Word दर्शयामास in 1_1_71 not found.
 Word समुद्रवचनात् in 1_1_71 not found.
-Word सेतुम् in 1_1_71 not found.
 Word अकारयत् in 1_1_71 not found.
 Word लङ्कापुरीं in 1_1_72 not found.
 Word गत्वा in 1_1_72 not found.
@@ -306,7 +294,6 @@ Word नार्यश्च in 1_1_82 not found.
 Word अविधवाः in 1_1_82 not found.
 Word अग्निजं in 1_1_83 not found.
 Word किञ्चित् in 1_1_83 not found.
-Word जन्तवः in 1_1_83 not found.
 Word अप्सु in 1_1_83 not found.
 Word वातजं in 1_1_83 not found.
 Word किञ्चित् in 1_1_83 not found.
