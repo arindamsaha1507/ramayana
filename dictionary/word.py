@@ -5,7 +5,7 @@ import json
 
 from akshara import varnakaarya as vk
 
-from dictionary.utils import WordType, Linga, Gana, Pada, Vibhakti, Vachana
+from dictionary.utils import UtilFuncs, WordType, Linga, Gana, Pada, Vibhakti, Vachana
 
 VIBHAKTI_MAP = {
     1: Vibhakti.PRATHAMA,
@@ -70,7 +70,14 @@ class SubantaMaker:
         vinyaasa = vk.get_vinyaasa(word)
         rep = vk.get_vinyaasa(replacement)
 
-        return vk.get_shabda(vinyaasa[:-number] + rep)
+        part_1 = vinyaasa[:-number]
+        part_2 = rep
+
+        if UtilFuncs.is_eligible_for_natva(part_1, part_2):
+            idd = part_2.index("न्")
+            part_2[idd] = "ण्"
+
+        return vk.get_shabda(part_1 + part_2)
 
     @staticmethod
     def collect_from_json(filename: str) -> list[Subanta]:
@@ -142,3 +149,8 @@ if __name__ == "__main__":
     print(sub)
 
     print(SubantaMaker.replace_end("देव", "एन"))
+
+    ww = "चारित्र"
+    ending = "एन"
+
+    print(SubantaMaker.replace_end(ww, ending))
