@@ -11,7 +11,7 @@ class KridantaCollector:
     """Class to collect kridantas."""
 
     @staticmethod
-    def create_gendered_line(words: list[str], replacement: str = "") -> str:
+    def create_gendered_line(words: list[str], replacement: str = "", suffix="") -> str:
         """Create gendered line."""
 
         words = [str(word).split(",") for word in words if str(word) != "nan"]
@@ -57,7 +57,7 @@ class KridantaCollector:
             vv = vk.get_vinyaasa(replacement)
             ll = len(vv)
             words = [
-                vk.get_shabda(vk.get_vinyaasa(word)[:-ll] + vv)
+                vk.get_shabda(vk.get_vinyaasa(word)[:-ll] + vv + [suffix])
                 if idd % 2 == 0
                 else word
                 for idd, word in enumerate(words)
@@ -138,7 +138,7 @@ class KridantaCollector:
 
             f.write(KridantaCollector.create_gendered_line(ktvtn, "अत्"))
             f.write(KridantaCollector.create_gendered_line(kt))
-            f.write(KridantaCollector.create_gendered_line(satr, "त्"))
+            f.write(KridantaCollector.create_gendered_line(satr, "त्", "छ्"))
             f.write(KridantaCollector.create_gendered_line(shaanac))
 
 

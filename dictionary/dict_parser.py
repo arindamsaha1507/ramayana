@@ -142,9 +142,13 @@ def create_primary_word_list(filename: str):
             typ = WordType.PRATIPADIKA
 
         for category in mwsa.get_category(entry):
+            if category == Linga.STRILINGA:
+                new_entry = UtilFuncs.make_strilinga(entry)
+            else:
+                new_entry = entry
             collection.append(
                 Word(
-                    entry,
+                    new_entry,
                     typ,
                     category,
                     mwsa.get_meaning(entry),

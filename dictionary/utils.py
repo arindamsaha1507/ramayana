@@ -152,10 +152,10 @@ class UtilFuncs:
                 return False
 
         for index in range(1, len(vinyaasa_1) + 1):
-            if vinyaasa_1[-index] not in permitted_letters:
-                return False
             if vinyaasa_1[-index] in ["र्", "ष्"]:
                 return True
+            if vinyaasa_1[-index] not in permitted_letters:
+                return False
 
         return False
 
@@ -192,11 +192,30 @@ class UtilFuncs:
             nn = 2
         elif last_letter == "स्":
             nn = 2
+        elif last_letter == "छ्":
+            nn = 3
         else:
             nn = 1
         last_letter = UtilFuncs.find_last_letter(word, nn)
 
         return f"{last_letter} {category}", nn
+
+    @staticmethod
+    def make_strilinga(word: str) -> str:
+        """Make the word strilinga."""
+
+        try:
+            vinyaasa = vk.get_vinyaasa(word)
+        except AssertionError:
+            return word
+
+        if vinyaasa[-1] == "अ":
+            if vinyaasa[-3:] == ["अ", "क्", "अ"]:
+                vinyaasa[-3] = "इ"
+
+            vinyaasa[-1] = "आ"
+
+        return vk.get_shabda(vinyaasa)
 
 
 if __name__ == "__main__":

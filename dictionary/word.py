@@ -149,6 +149,7 @@ if __name__ == "__main__":
     print(sub)
 
     print(SubantaMaker.replace_end("देव", "एन"))
+    print(SubantaMaker.replace_end("ऋषि", "ईनाम्"))
 
     ww = "चारित्र"
     ending = "एन"
